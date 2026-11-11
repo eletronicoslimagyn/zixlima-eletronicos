@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - ZIXLIMA ELETRÔNICOS</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <header class="admin-header">
+      <h1>⚙️ Painel Administrativo</h1>
+      <p class="admin-subtitulo">ZIXLIMA ELETRÔNICOS</p>
+    </header>
+
+    <nav class="admin-tabs" role="tablist">
+      <button class="admin-tab ativo" data-aba="produtos" role="tab">📦 Produtos</button>
+      <button class="admin-tab" data-aba="ordens" role="tab">🧾 Ordens de Serviço</button>
+      <button class="admin-tab" data-aba="fotos" role="tab">📸 Fotos</button>
+      <button class="admin-tab" data-aba="perfil" role="tab">👤 Perfil</button>
+      <button class="admin-tab" data-aba="config" role="tab">⚙️ Configurações</button>
+    </nav>
+
+    <section class="admin-painel ativo" id="aba-produtos" role="tabpanel">
+      <h2>📦 Gerenciar Produtos</h2>
+      <div class="placeholder">Conteúdo de produtos aqui...</div>
+    </section>
+
+    <section class="admin-painel" id="aba-ordens" role="tabpanel">
+      <h2>🧾 Ordens de Serviço</h2>
+      <div class="placeholder">Conteúdo de ordens de serviço aqui...</div>
+    </section>
+
+    <section class="admin-painel" id="aba-fotos" role="tabpanel">
+      <h2>📸 Fotos de Produtos</h2>
+      <p class="dica">Envie fotos direto para o repositório do GitHub.</p>
+      <button id="btnAbrirUpload" class="btn-principal">➕ Adicionar Foto</button>
+      <div id="galeriaFotos" class="galeria-fotos"></div>
+    </section>
+
+    <section class="admin-painel" id="aba-perfil" role="tabpanel">
+      <h2>👤 Configuração de Perfil</h2>
+      <p class="dica">Esses dados ficam salvos no seu navegador (localStorage).</p>
+      <form id="formPerfil" class="form-perfil">
+        <div class="avatar-area">
+          <div class="avatar-preview" id="avatarPreview">👤</div>
+          <label for="avatarInput" class="btn-secundario">Alterar foto</label>
+          <input type="file" id="avatarInput" accept="image/*" hidden>
+        </div>
+        <div class="campo"><label for="perfilNome">Nome completo</label><input type="text" id="perfilNome" placeholder="Seu nome"></div>
+        <div class="campo"><label for="perfilEmail">E-mail</label><input type="email" id="perfilEmail" placeholder="seu@email.com"></div>
+        <div class="campo"><label for="perfilTelefone">Telefone / WhatsApp</label><input type="tel" id="perfilTelefone" placeholder="(31) 99999-9999"></div>
+        <div class="campo"><label for="perfilLoja">Nome da loja</label><input type="text" id="perfilLoja" placeholder="ZIXLIMA ELETRÔNICOS"></div>
+        <div class="campo"><label for="perfilBio">Bio / Apresentação</label><textarea id="perfilBio" rows="3" placeholder="Fale um pouco sobre a loja..."></textarea></div>
+        <div class="acoes-form">
+          <button type="submit" class="btn-principal">💾 Salvar Perfil</button>
+          <button type="button" id="btnLimparPerfil" class="btn-perigo">🗑️ Limpar Dados</button>
+        </div>
+        <div id="perfilStatus" class="status-msg"></div>
+      </form>
+    </section>
+
+    <section class="admin-painel" id="aba-config" role="tabpanel">
+      <h2>⚙️ Configurações do Site</h2>
+      <form id="formConfig" class="form-config">
+        <div class="campo"><label for="cfgRepoOwner">Usuário do GitHub</label><input type="text" id="cfgRepoOwner" placeholder="eletronicoslimagyn"></div>
+        <div class="campo"><label for="cfgRepoNome">Repositório</label><input type="text" id="cfgRepoNome" placeholder="zixlima-eletronicos"></div>
+        <div class="campo"><label for="cfgBranch">Branch</label><input type="text" id="cfgBranch" placeholder="main"></div>
+        <div class="campo"><label for="cfgPastaFotos">Pasta das fotos</label><input type="text" id="cfgPastaFotos" placeholder="images/produtos"></div>
+        <div class="campo"><label for="cfgToken">Token do GitHub (não é salvo)</label><input type="password" id="cfgToken" placeholder="ghp_..."><small>Por segurança, o token nunca é salvo no navegador. Digite a cada sessão.</small></div>
+        <div class="campo"><label for="cfgTema">Tema</label><select id="cfgTema"><option value="claro">Claro</option><option value="escuro">Escuro</option></select></div>
+        <div class="acoes-form"><button type="submit" class="btn-principal">💾 Salvar Configurações</button></div>
+        <div id="configStatus" class="status-msg"></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Modal de Upload -->
+  <div id="uploadModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background:#fff; border-radius:16px; padding:20px; max-width:400px; width:90%; max-height:90vh; overflow-y:auto;">
+      <h3 style="margin-top:0;">📸 Adicionar Foto do Produto</h3>
+      <label style="display:block; margin-bottom:8px; font-weight:600;">Nome do arquivo (sem espaços):</label>
+      <input type="text" id="fotoNome" placeholder="ex: ps5-slim-01" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; margin-bottom:12px; box-sizing:border-box;">
+      <label style="display:block; margin-bottom:8px; font-weight:600;">Selecionar imagem:</label>
+      <input type="file" id="fotoInput" accept="image/*" capture="environment" style="width:100%; margin-bottom:12px;">
+      <div id="fotoPreview" style="margin-bottom:12px; text-align:center;"></div>
+      <label style="display:block; margin-bottom:8px; font-weight:600;">Token do GitHub (não será salvo):</label>
+      <input type="password" id="ghToken" placeholder="ghp_..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; margin-bottom:12px; box-sizing:border-box;">
+      <small style="color:#888; display:block; margin-bottom:12px;">Crie em: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. Permissão: Contents = Read and write.</small>
+      <div style="display:flex; gap:10px;">
+        <button id="btnUpload" style="flex:1; padding:12px; background:#22c55e; color:#fff; border:none; border-radius:8px; font-weight:700; cursor:pointer;">Enviar para GitHub</button>
+        <button id="btnCancelar" style="flex:1; padding:12px; background:#ef4444; color:#fff; border:none; border-radius:8px; font-weight:700; cursor:pointer;">Cancelar</button>
+      </div>
+      <div id="uploadStatus" style="margin-top:12px; text-align:center; font-weight:600;"></div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+  <script src="upload.js"></script>
+</body>
+</html>
+
+

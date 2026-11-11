@@ -107,7 +107,21 @@
                         <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">CNPJ / CPF</label><input type="text" id="config-cnpj" class="w-full mt-1 p-2 border rounded dark:bg-slate-700 dark:border-gray-600 outline-none"></div>
                         <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">Link do WhatsApp</label><input type="text" id="config-whats" class="w-full mt-1 p-2 border rounded dark:bg-slate-700 dark:border-gray-600 outline-none"></div>
                         <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">Chave Pix</label><input type="text" id="config-pix" class="w-full mt-1 p-2 border rounded dark:bg-slate-700 dark:border-gray-600 outline-none"></div>
-                        <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">URL da Logo</label><input type="text" id="config-logo" class="w-full mt-1 p-2 border rounded dark:bg-slate-700 dark:border-gray-600 outline-none"></div>
+                        <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">URL da Logo</label><input type="text" id="config-logo" class="w-full mt-1 p-2 border rounded dark:bg-slate-700 dark:border-gray-600 outline-none">
+
+<div class="mb-3">
+    <label class="block text-sm font-medium text-gray-700">Usuário do GitHub</label>
+    <input type="text" id="config-github-user" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+</div>
+<div class="mb-3">
+    <label class="block text-sm font-medium text-gray-700">Repositório do GitHub</label>
+    <input type="text" id="config-github-repo" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+</div>
+<div class="mb-3">
+    <label class="block text-sm font-medium text-gray-700">Token do GitHub</label>
+    <input type="password" id="config-github-token" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+</div>
+</div>
                         <button onclick="salvarConfiguracoes()" class="bg-brand-blue text-white w-full py-2 rounded font-bold mt-2 hover:bg-blue-800 transition">Salvar Alterações</button>
                     </div>
                 </div>
@@ -143,7 +157,7 @@
                     <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">Condição</label><select id="produto-condicao" class="w-full p-2 border rounded dark:bg-slate-700"><option value="Novo">Novo</option><option value="Usado">Usado</option></select></div>
                 </div>
                 <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">Categoria</label><input type="text" id="produto-categoria" required class="w-full p-2 border rounded dark:bg-slate-700"></div>
-                <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">URL da Imagem</label><input type="url" id="produto-imagem" required class="w-full p-2 border rounded dark:bg-slate-700"></div>
+                <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">URL da Imagem</label><input type="file" id="produto-imagem-file" accept="image/*" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-white"></div>
                 <div><label class="text-xs font-bold text-gray-600 dark:text-gray-400">Link (Opcional)</label><input type="url" id="produto-link" class="w-full p-2 border rounded dark:bg-slate-700"></div>
                 <div class="flex gap-2 pt-2">
                     <button type="button" onclick="fecharModalProduto()" class="flex-1 bg-gray-300 text-gray-800 py-2 rounded font-bold">Cancelar</button>
@@ -383,5 +397,6 @@
             reader.readAsText(file); event.target.value = '';
         }
     </script>
+<script src="upload.js"></script>
 </body>
 </html>
